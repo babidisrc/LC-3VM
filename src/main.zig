@@ -36,4 +36,32 @@ const Flags = struct {
 
 pub fn main() void {
     reg[Registers.R_COUNT] = Flags.FL_ZRO;
+
+    reg[Registers.R_PC] = 0x3000;
+
+    const running: u32 = 1;
+    while (running) {
+        var instr: u16 = mem_read(reg[R_PC]++);
+        var op: u16 = instr >> 12;
+    }
+
+    switch (op) {
+        Opcodes.OP_ADD => std.debug.print("OP_ADD\n", .{}),
+        Opcodes.OP_AND => std.debug.print("OP_AND\n", .{}),
+        Opcodes.OP_NOT => std.debug.print("OP_NOT\n", .{}),
+        Opcodes.OP_BR => std.debug.print("OP_BR\n", .{}),
+        Opcodes.OP_JMP => std.debug.print("OP_JMP\n", .{}),
+        Opcodes.OP_JSR => std.debug.print("OP_JSR\n", .{}),
+        Opcodes.OP_LD => std.debug.print("OP_LD\n", .{}),
+        Opcodes.OP_LDI => std.debug.print("OP_LDI\n", .{}),
+        Opcodes.OP_LDR => std.debug.print("OP_LDR\n", .{}),
+        Opcodes.OP_LEA => std.debug.print("OP_LEA\n", .{}),
+        Opcodes.OP_ST => std.debug.print("OP_ST\n", .{}),
+        Opcodes.OP_STI => std.debug.print("OP_STI\n", .{}),
+        Opcodes.OP_STR => std.debug.print("OP_STR\n", .{}),
+        Opcodes.OP_TRAP => std.debug.print("OP_TRAP\n", .{}),
+        Opcodes.OP_RES => std.debug.print("OP_RES\n", .{}),
+        Opcodes.OP_RTI => std.debug.print("OP_RTI\n", .{}),
+        else => std.debug.print("BAD CODE\n", .{}),
+    }
 }
